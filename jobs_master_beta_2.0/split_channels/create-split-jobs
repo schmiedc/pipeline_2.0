@@ -19,7 +19,8 @@ do
                 echo $job
                 echo "#!/bin/bash" > "$job"
                 echo "$XVFB_RUN -a $Fiji -Ddir=$dir -Dtimepoint=$i -Dangle=$a \
-		-Dpad=$pad_resave -Dtarget_split=$target_split -- --no-splash $split" >> "$job"
+		-Dpad=$pad -Dtarget_split=$dir -- --no-splash \
+		$split" >> "$job"
                 chmod a+x "$job"
         done
 done

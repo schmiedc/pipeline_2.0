@@ -31,44 +31,35 @@ angles="1,2,3,4,5"                                    # angles
 num_angles="5" 					      # number of angles
 pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif" # pattern of spim
 						      # for padded zeros use tt
+pad="2"						      # For padded zero
 referencetp="9"					      # reference timepoint 
-xy_resolution="1"				      # Manual calibration
-z_scaling="3.2258064"
+xy_resolution="1"				      # Manual calibration xy
+z_scaling="3.2258064"   			      # Manual calibration z
  
 #-------------------------------------------------------------------------------
-#                            Renaming .czi files 
+#                           Preprocessing 
+# 
+# Use czi_resave for .czi files and ometiff files for .ometiff files
+#
+# Split Channels (Only for multi-channel data):
+# Outputs channls as: spim_TL{tt}_Angle{a}_Channel0
+#                     spim_TL{tt}_Angle{a}_Channel1
+# saves into dir
 #-------------------------------------------------------------------------------
 
+#--- Renaming czi files --------------------------------------------------------
 first_index="0"                                       # First index of czi files
 last_index="94"					      # Last index
 first_timepoint="1"                                   # The first timepoint 
 angles_renaming=(1 2 3 4 5)                           # Angles
- pad_rename_czi="2" 			              # For padded zero 2 = 01; 
+pad_rename_czi="2" 			              # For padded zero 2 = 01; 
 						      						      
 source_pattern=/2014-04-21_Stock14_Stock19_2\(\{index\}\).czi
 target_pattern=/spim_TL\{timepoint\}_Angle\{angle\}.czi
  
-#-------------------------------------------------------------------------------
-#                      Resaving .czi or ome.tiff as .tif 
-# 
-# use ometiff_resave for ome.tiff and czi_resave for .czi
-#-------------------------------------------------------------------------------
-
-angle_resaving="1 2 3 4 5"
-pad_resave="2"                                        # For padded zero 2 = 01; 
-						      # 3 = 001
- 
-#-------------------------------------------------------------------------------
-#                               Split Channels 
-#
-# Only for multi-channel data
-# Outputs channls as: spim_TL{tt}_Angle{a}_Channel0
-#                     spim_TL{tt}_Angle{a}_Channel1
-#-------------------------------------------------------------------------------
-
-angles_split="1 2 3 4 5"
-target_split="/" 				      # Target directory
- 
+#--- Resaving and splitting  ---------------------------------------------------
+angle_prep="1 2 3 4 5" 
+						   
 #-------------------------------------------------------------------------------
 # 			   Multi-view registration 
 # 

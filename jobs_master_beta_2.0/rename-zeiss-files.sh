@@ -9,11 +9,11 @@ target_pattern=${dir}${target_pattern}
 
 i=${first_index}
 t=${first_timepoint}
-t=`printf "%0${pad_rename_czi}d" "${t}"`
+t=`printf "%0${pad}d" "${t}"`
 
 while [ $i -le $last_index ]; do
 
-	for a in "${angles_renaming[@]}"; do
+	for a in "${angles_prep[@]}"; do
 		source=${source_pattern/\{index\}/${i}}
 		tmp=${target_pattern/\{timepoint\}/${t}}
 		target=${tmp/\{angle\}/${a}}
@@ -27,7 +27,7 @@ while [ $i -le $last_index ]; do
 	done
 	t=$(( 10#${t} ))
 	let t=t+1
-	t=`printf "%0${pad_rename_czi}d" "${t}"`
+	t=`printf "%0${pad}d" "${t}"`
 	
 done
 
