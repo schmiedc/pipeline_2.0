@@ -17,22 +17,22 @@
 #------------------------------------------------------------------------------- 
 #                           General Parameters 
 #
-# Dataset: 2014-04-21_Stock14_Stock19
+# Dataset: Test scripts
 #
 # Select single or multi channel:
-# 	single channel: pattern_of_spim="spim_TL{t}_Angle{a}.tif" 
+# 	single channel: pattern_of_spim="spim_TL{tt}_Angle{a}.tif" 
 # 	multi channel: pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif"
 #-------------------------------------------------------------------------------
 
-dir="/projects/pilot_spim/Christopher/2014-04-21_Stock14_Stock19/" # Data 
-                   						   # directory
-timepoint="`seq 1 19`"                                # timepoints
+dir="/projects/pilot_spim/Christopher/Test_scripts/ometiff/" # Data 
+                   						    # directory
+timepoint="`seq 1 2`"                                 # timepoints
 angles="1,2,3,4,5"                                    # angles
 num_angles="5" 					      # number of angles
-pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif" # pattern of spim
+pattern_of_spim="spim_TL{tt}_Angle{a}.tif"            # pattern of spim
 						      # for padded zeros use tt
-pad="2"						      # For padded zero
-referencetp="9"					      # reference timepoint 
+pad="2"						      # For padded zeros
+referencetp="1"					      # reference timepoint 
 xy_resolution="1"				      # Manual calibration xy
 z_scaling="3.2258064"   			      # Manual calibration z
  
@@ -49,12 +49,11 @@ z_scaling="3.2258064"   			      # Manual calibration z
 
 #--- Renaming czi files --------------------------------------------------------
 first_index="0"                                       # First index of czi files
-last_index="94"					      # Last index
+last_index="9"					      # Last index
 first_timepoint="1"                                   # The first timepoint 
 angles_renaming=(1 2 3 4 5)                           # Angles
-pad_rename_czi="2" 			              # For padded zero 2 = 01; 
 						      						      
-source_pattern=/2014-04-21_Stock14_Stock19_2\(\{index\}\).czi
+source_pattern=/2013-11-14_His-YFP\(\{index\}\).czi
 target_pattern=/spim_TL\{timepoint\}_Angle\{angle\}.czi
  
 #--- Resaving and splitting  ---------------------------------------------------
@@ -115,10 +114,10 @@ channel_target="0"
 #  registration_fusion="\"Individual registration of channel 0\""
 #-------------------------------------------------------------------------------
  
-select_channel="Multi-channel"          # Multi channel 
+select_channel="Multi-channel"          # Single or multi channel 
 
-registration_fusion="\"Time-point registration (reference=9) of channel 0\""
-registration_fusion1="\"Time-point registration (reference=9) of channel 1\""
+registration_fusion="\"Time-point registration (reference=1) of channel 0\""
+registration_fusion1="\"Time-point registration (reference=1) of channel 1\""
 
 downsample_output="1"                   # Downsampling
 x="4"		                        # Cropping parameters of full resolution
@@ -196,7 +195,6 @@ maximum_rendering="0.005"                    # Max single channel
 # zSlices="369" 			     # For multi-channel rendering:
  
 #--- Orientation or rotation ---------------------------------------------------
-
 # rotation_lateral: 3d-affine: (0.9736341, -0.090486586, 0.2094066, 0.0, 
 #				-0.18908852, -0.8336387, 0.51894456, 0.0, 
 #				0.12761092, -0.5448576, -0.8287677, 0.0)

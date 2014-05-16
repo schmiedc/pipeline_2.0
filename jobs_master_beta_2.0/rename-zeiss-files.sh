@@ -13,15 +13,15 @@ t=`printf "%0${pad}d" "${t}"`
 
 while [ $i -le $last_index ]; do
 
-	for a in "${angles_prep[@]}"; do
+	for a in "${angles_renaming[@]}"; do
 		source=${source_pattern/\{index\}/${i}}
 		tmp=${target_pattern/\{timepoint\}/${t}}
 		target=${tmp/\{angle\}/${a}}
 		
 		echo ${source} ${target}	
 
-		mv ${source} ${target}
-		#cp ${source} ${target}
+		#mv ${source} ${target}
+		cp ${source} ${target}
 		let i=i+1
 		
 	done

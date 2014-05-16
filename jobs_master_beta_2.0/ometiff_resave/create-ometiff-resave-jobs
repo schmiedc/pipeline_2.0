@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /projects/tomancak_lightsheet/Christopher/pipeline/master
+source /projects/pilot_spim/Christopher/pipeline/master
 
 mkdir -p $jobs_resaving
 
