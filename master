@@ -247,40 +247,44 @@ scale="1"
  
 XVFB_RUN="/sw/bin/xvfb-run"				  # virtual frame buffer
 Fiji="/sw/users/tomancak/packages/Fiji.app/ImageJ-linux64" # Fiji 
- 
+
+job_directory="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0"
+
 #-------------------------------------------------------------------------------
 # Pre-processing 
 #-------------------------------------------------------------------------------
 
 #--- Resaving .czi into .tif files----------------------------------------------
 # Working directory
-jobs_resaving="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/czi_resave/"
+jobs_resaving=${job_directory}"/czi_resave/"
+
+#jobs_resaving="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/czi_resave/"
  
 # Working script
-resaving="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/czi_resave/resaving.bsh"
+resaving=${job_directory}"/czi_resave/resaving.bsh"
  
 #--- Resaving ome.tiff into .tif files -----------------------------------------
 # Working directory
-jobs_resaving_ometiff="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/ometiff_resave/"
+jobs_resaving_ometiff=${job_directory}"/ometiff_resave/"
  
 # Working script
-resaving_ometiff="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/ometiff_resave/resaving-ometiff.bsh"
+resaving_ometiff=${job_directory}"/ometiff_resave/resaving-ometiff.bsh"
  
 #--- Split channels-------------------------------------------------------------
 # Working directory
-jobs_split="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/split_channels/"
+jobs_split=${job_directory}"/split_channels/"
  
 # Working script
-split="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/split_channels/split.bsh"
+split=${job_directory}"/split_channels/split.bsh"
  
 #------------------------------------------------------------------------------- 
 # Multi-view Registration 
 #-------------------------------------------------------------------------------
 # Working directory
-jobs_registration="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/registration/"
+jobs_registration=${job_directory}"/registration/"
  
 # Working script
-registration="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/registration/registration.bsh"
+registration=${job_directory}"/registration/registration.bsh"
  
 # registration parameters
 type_of_registration="Single-channel"
@@ -294,20 +298,20 @@ imglib_container="\"Array container (images smaller ~2048x2048x450 px)\""
 #-------------------------------------------------------------------------------
 
 # Working directory
-jobs_timelapse="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/timelapse_registration/"
+jobs_timelapse=${job_directory}"/timelapse_registration/"
  
 # Working script
-timelapse_registration="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/timelapse_registration/time-lapse.bsh"
+timelapse_registration=${job_directory}"/timelapse_registration/time-lapse.bsh"
 
 #-------------------------------------------------------------------------------
 # Multi-view fusion
 #-------------------------------------------------------------------------------
 
 # Working directory
-jobs_fusion="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/fusion/"
+jobs_fusion=${job_directory}"/fusion/"
  
 # Working script
-fusion="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/fusion/fusion.bsh"
+fusion=${job_directory}"/fusion/fusion.bsh"
  
 # Fusion parameters
 fusion_method="\"Fuse into a single image\""
@@ -321,19 +325,19 @@ fused_image_output="\"Save 2d-slices, one directory per time-point\""
 #-------------------------------------------------------------------------------
 
 # Working directory
-jobs_external_transformation="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/external_transformation/"
+jobs_external_transformation=${job_directory}"/external_transformation/"
  
 # Working script
-external_transformation="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/external_transformation/external_transformation.bsh"
+external_transformation=${job_directory}"/external_transformation/external_transformation.bsh"
  
 #-------------------------------------------------------------------------------
 # Multi-view deconvolution 
 #-------------------------------------------------------------------------------
 # Working directory
-jobs_deconvolution="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/deconvolution/"
+jobs_deconvolution=${job_directory}"/deconvolution/"
  
 # Working script
-deconvolution="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/deconvolution/deconvolution.bsh"
+deconvolution=${job_directory}"/deconvolution/deconvolution.bsh"
  
 # Deconvolution parameters
 type_of_iteration="\"Efficient Bayesian - Optimization I (fast, precise)\""
@@ -362,10 +366,10 @@ Fiji_rendering="/sw/users/tomancak/packages/Fiji.app.render/ImageJ-linux64"
 Fiji_export="/sw/users/pietzsch/packages/Fiji.app/ImageJ-linux64"
 
 # Working directory
-jobs_export="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/hdf5/"
+jobs_export=${job_directory}"/hdf5/"
 
 # Working script
-export="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/hdf5/export.bsh"
+export=${job_directory}"/hdf5/export.bsh"
 
 # overrideImageZStretching does not work
 # overrideImageZStretching="true" 
