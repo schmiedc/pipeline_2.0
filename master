@@ -174,11 +174,10 @@ decod="447"
 # Different settings for single or for multi channel
 #-------------------------------------------------------------------------------
 
-#--- Working script ------------------------------------------------------------
-rendering="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/3d_rendering_cpu/single-render-mov.bsh"
-
 #--- General settings ----------------------------------------------------------
-jobs_rendering="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/3d_rendering_cpu"
+jobs_rendering=${job_directory}"/3d_rendering_cpu" 		# directory
+rendering=${jobs_rendering}"/single-render-mov.bsh" # script single or 
+						    # multi-channel
 source_rendering="/output"                   # source
 target_rendering="/rendering"                # target directory
 nframes="6"                                  # nframes for rotation 
@@ -255,39 +254,28 @@ job_directory="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0"
 #-------------------------------------------------------------------------------
 
 #--- Resaving .czi into .tif files----------------------------------------------
-# Working directory
-jobs_resaving=${job_directory}"/czi_resave/"
 
-#jobs_resaving="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0/czi_resave/"
- 
-# Working script
-resaving=${job_directory}"/czi_resave/resaving.bsh"
+jobs_resaving=${job_directory}"/czi_resave/" 			# directory
+resaving=${jobs_resaving}"/resaving.bsh" 			# script
  
 #--- Resaving ome.tiff into .tif files -----------------------------------------
-# Working directory
-jobs_resaving_ometiff=${job_directory}"/ometiff_resave/"
- 
-# Working script
-resaving_ometiff=${job_directory}"/ometiff_resave/resaving-ometiff.bsh"
+
+jobs_resaving_ometiff=${job_directory}"/ometiff_resave/" 	 # directory
+resaving_ometiff=${jobs_resaving_ometiff}"/resaving-ometiff.bsh" # script
  
 #--- Split channels-------------------------------------------------------------
-# Working directory
-jobs_split=${job_directory}"/split_channels/"
- 
-# Working script
-split=${job_directory}"/split_channels/split.bsh"
+
+jobs_split=${job_directory}"/split_channels/" 			# directory
+split=${jobs_split}"/split.bsh" 				# script
  
 #------------------------------------------------------------------------------- 
 # Multi-view Registration 
 #-------------------------------------------------------------------------------
-# Working directory
-jobs_registration=${job_directory}"/registration/"
+
+jobs_registration=${job_directory}"/registration/" 		# directory
+registration=${jobs_registration}"/registration.bsh" 		# script
  
-# Working script
-registration=${job_directory}"/registration/registration.bsh"
- 
-# registration parameters
-type_of_registration="Single-channel"
+type_of_registration="Single-channel" 		# registration parameters
 bead_brightness="\"Advanced ...\""
 subpixel_localization="\"3-dimensional quadratic fit (all detections)\""
 transformation_model="Affine"
@@ -297,25 +285,18 @@ imglib_container="\"Array container (images smaller ~2048x2048x450 px)\""
 # Timelapse registration
 #-------------------------------------------------------------------------------
 
-# Working directory
-jobs_timelapse=${job_directory}"/timelapse_registration/"
- 
-# Working script
-timelapse_registration=${job_directory}"/timelapse_registration/time-lapse.bsh"
+jobs_timelapse=${job_directory}"/timelapse_registration/" 	# directory
+timelapse_registration=${jobs_timelapse}"/time-lapse.bsh" 	# script
 
 #-------------------------------------------------------------------------------
 # Multi-view fusion
 #-------------------------------------------------------------------------------
 
-# Working directory
-jobs_fusion=${job_directory}"/fusion/"
+jobs_fusion=${job_directory}"/fusion/" 				# directory
+fusion=${jobs_fusion}"/fusion.bsh" 				# script
  
-# Working script
-fusion=${job_directory}"/fusion/fusion.bsh"
- 
-# Fusion parameters
-fusion_method="\"Fuse into a single image\""
-process_views_in_paralell="All"
+fusion_method="\"Fuse into a single image\"" 		    # Fusion parameters
+process_views_in_paralell="All" 
 blending="blending"
 weights="\"content_based_weights_(fast,\""
 fused_image_output="\"Save 2d-slices, one directory per time-point\""
@@ -324,20 +305,15 @@ fused_image_output="\"Save 2d-slices, one directory per time-point\""
 # External transformation
 #-------------------------------------------------------------------------------
 
-# Working directory
 jobs_external_transformation=${job_directory}"/external_transformation/"
- 
-# Working script
-external_transformation=${job_directory}"/external_transformation/external_transformation.bsh"
+external_transformation=${jobs_external_transformation}"/external_transformation.bsh"
  
 #-------------------------------------------------------------------------------
 # Multi-view deconvolution 
 #-------------------------------------------------------------------------------
-# Working directory
-jobs_deconvolution=${job_directory}"/deconvolution/"
- 
-# Working script
-deconvolution=${job_directory}"/deconvolution/deconvolution.bsh"
+
+jobs_deconvolution=${job_directory}"/deconvolution/"            # directory
+deconvolution=${jobs_deconvolution}"/deconvolution.bsh" 	# script
  
 # Deconvolution parameters
 type_of_iteration="\"Efficient Bayesian - Optimization I (fast, precise)\""
@@ -355,21 +331,15 @@ fused_image_output="\"Save 2d-slices, one directory per time-point\""
 # Rendering
 #-------------------------------------------------------------------------------
 
-# Fiji for rendering
-Fiji_rendering="/sw/users/tomancak/packages/Fiji.app.render/ImageJ-linux64"
+Fiji_rendering="/sw/users/tomancak/packages/Fiji.app.render/ImageJ-linux64" 
 
 #-------------------------------------------------------------------------------
 # hdf5 export
 #-------------------------------------------------------------------------------
 
-# Fiji_tobias
-Fiji_export="/sw/users/pietzsch/packages/Fiji.app/ImageJ-linux64"
-
-# Working directory
-jobs_export=${job_directory}"/hdf5/"
-
-# Working script
-export=${job_directory}"/hdf5/export.bsh"
+Fiji_export="/sw/users/pietzsch/packages/Fiji.app/ImageJ-linux64" # Fiji_tobias
+jobs_export=${job_directory}"/hdf5/" 				# directory
+export=${jobs_export}"/export.bsh" 				# script
 
 # overrideImageZStretching does not work
 # overrideImageZStretching="true" 
