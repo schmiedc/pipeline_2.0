@@ -86,12 +86,7 @@ pattern_switch="\"spim_"$padding"_Angle{a}${c2}.tif\""
 
 #-------------------------------------------------------------------------------
 # 			   Multi-view registration 
-# 
-# Select single or multi channel:
-#     single channel: spim_TL{t}_Angle{a}.tif
-#     multi-channel: spim_TL{t}_Angle{a}_Channel1.tif
-#     Channel1 is the channel that contains the beads
-# 
+#
 # Specify the method for Detection of beads: 
 #     Difference of mean: Comment out Difference of Gaussian in registration.bsh 
 #     Difference of Gaussian: Comment out Differnce of Mean in registration.bsh
@@ -126,11 +121,8 @@ channel_target="0"
 #------------------------------------------------------------------------------- 
 #		    Multi-view content based fusion 
 # 
-# Select single or multi channel:
 #  single channel: comment out 2nd fusion command in fusion.bsh
-#			select_channel="Single-channel"
-#  multi channel: select_channel="Multi-channel"
-#                 comment in registration_fusion1
+#   multi channel: comment in registration_fusion1
 #
 # Select timelapse registration or individual registration:
 #  timelapse: 
@@ -160,9 +152,6 @@ d="710"
 # Only single channel, use external transformation for each individual channel
 # Cation! make a copy of the registration files befor external transformation
 # 
-# Select single channel or multichannel: 
-# 	single: pattern_extrans="spim_TL{t}_Angle{a}.tif"   
-#	multi: pattern_extrans="spim_TL{tt}_Angle{a}_Channel1.tif"
 #-------------------------------------------------------------------------------
 
 #pattern_extrans="spim_TL{t}_Angle{a}.tif"         # pattern of SPIM data
@@ -181,7 +170,7 @@ m22="0.5"
 # multi: pattern_deconvo="spim_TL{tt}_Angle{a}_Channel1.tif"
 #-------------------------------------------------------------------------------
 
-#pattern_deconvo="spim_TL{t}_Angle{a}.tif"   # Pattern
+pattern_deconvo="spim_TL{t}_Angle{a}.tif"   # Pattern
 
 iter="10"				    # Number of iterations
 psf_estimation="\"Extract from beads\""     # PSF parameters 
@@ -235,12 +224,8 @@ maximum_rendering="0.005"                    # Max single channel
 #				hdf5 export 
 #
 # Single or multi channel:
-# 
-# single: inputFilePattern="\"spim_TL{t}_Angle{a}.tif\""
-#	  channels_export="\"0\""
-#
-# multi: inputFilePattern="\"spim_TL{tt}_Angle{a}_Channel{c}.tif\""
-#        channels_export="\"0,1\""
+#                  single: channels_export="\"0\""
+#                   multi: channels_export="\"0,1\""
 #-------------------------------------------------------------------------------
 
 target_hdf5="/hdf5/"				             # Target directory
@@ -339,7 +324,6 @@ pattern_extrans=${pattern_switch}
 
 jobs_deconvolution=${job_directory}"/deconvolution/"            # directory
 deconvolution=${jobs_deconvolution}"/deconvolution.bsh" 	# script
-pattern_deconvo=${pattern_switch}
 type_of_iteration="\"Efficient Bayesian - Optimization I (fast, precise)\""
 osem_acceleration="\"1 (balanced)\""
 use_tikhonov_regularization="use_tikhonov_regularization"
