@@ -66,10 +66,13 @@ angle_prep="1 2 3 4 5"
 
 #=== Function ==================================================================
 # 	 NAME: channel switch
-# DESCRIPTION: changes the pattern to multichannel
-# Parameter 1: select_channel
-# Parameter 2: Channel_beads
+# DESCRIPTION: changes the pattern to multichannel and uses padding
+# Parameter 1: pattern_of_spim
+# Parameter 2: select_channel
+# Parameter 3: Channel_beads
 #===============================================================================
+
+padding="$( cut -d '_' -f 2 <<<$pattern_of_spim )";
 
 if [ "$select_channel" == "Multi-channel" ]; then
 
@@ -79,7 +82,7 @@ if [ "$select_channel" == "Multi-channel" ]; then
                         c2=""
 fi
 
-pattern_switch="\"spim_TL{tt}_Angle{a}${c2}.tif\""
+pattern_switch="\"spim_"$padding"_Angle{a}${c2}.tif\""
 
 #-------------------------------------------------------------------------------
 # 			   Multi-view registration 
@@ -252,11 +255,10 @@ filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data
 export_numSlices="710"
 sliceValueMin="0"			# Minimal intensity histogram
 sliceValueMax="60000"			# Maximal intensity histogram
-
-cropOffsetX="4"
-cropOffsetY="310"
-cropOffsetZ="280" 
-scale="1"
+cropOffsetX="4"				# x crop
+cropOffsetY="310"			# y crop
+cropOffsetZ="280" 			# z crop
+scale="1"				# downsample factor
 
 #===============================================================================
 # Directories for scripts and advanced settings for processing 
