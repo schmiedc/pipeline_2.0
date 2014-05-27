@@ -24,27 +24,27 @@
 # 	multi channel: pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif"
 #-------------------------------------------------------------------------------
 
-dir="/projects/pilot_spim/Christopher/Test_scripts/ometiff/" # Data 
+dir="/projects/pilot_spim/Christopher/Test_scripts/single-channel/" # Data 
                    					     # directory
+job_directory="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0"
 timepoint="`seq 1 2`"                                 # timepoints
-angles="1,2,3,4,5"                                    # angles
-num_angles="5" 					      # number of angles
-pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif" # pattern of spim
+angles="1,2,3"                                    # angles
+num_angles="3" 					      # number of angles
+pattern_of_spim="spim_TL{tt}_Angle{a}.tif" # pattern of spim
 						      # for padded zeros use tt
-select_channel="Multi-channel"          # Single or multi channel
-Channel_beads="1"			# Channel that contains the beads
-						      
+select_channel="Single-channel"          # Single or multi channel
+Channel_beads="1"			# Channel that contains the beads						      
 pad="2"						      # For padded zeros
 referencetp="1"					      # reference timepoint 
 xy_resolution="1"				      # Manual calibration xy
-z_scaling="3.2258064"   			      # Manual calibration z
+z_scaling="3.264352"   			      # Manual calibration z
  
 #-------------------------------------------------------------------------------
 #                           Preprocessing 
 # 
 # Use czi_resave for .czi files and ometiff files for .ometiff files
 #
-# Split Channels (Only for multi-channel data):
+# split.bsh for multi-channel data):
 # Outputs channls as: spim_TL{tt}_Angle{a}_Channel0
 #                     spim_TL{tt}_Angle{a}_Channel1
 # saves into dir
@@ -55,14 +55,14 @@ z_scaling="3.2258064"   			      # Manual calibration z
 first_index="0"                                       # First index of czi files
 last_index="9"					      # Last index
 first_timepoint="1"                                   # The first timepoint 
-angles_renaming=(1 2 3 4 5)                           # Angles
+angles_renaming=(1 2 3)                           # Angles
 						      						      
 source_pattern=/2013-11-14_His-YFP\(\{index\}\).czi
 target_pattern=/spim_TL\{timepoint\}_Angle\{angle\}.czi
  
 #--- Resaving and splitting  ---------------------------------------------------
 
-angle_prep="1 2 3 4 5" 
+angle_prep="1 2 3" 
 
 #=== Function ==================================================================
 # 	 NAME: channel switch
@@ -97,7 +97,7 @@ pattern_switch="\"spim_"$padding"_Angle{a}${c2}.tif\""
 type_of_detection="\"Difference-of-Mean (Integral image based)\"" # Difference
 radius1="2"							  # of Mean 
 radius2="3"
-threshold="0.010"
+threshold="0.004"
 
 # type_of_detection="\"Difference-of-Gaussian\""		  # Difference 	
 # initial_sigma="1.8000"					  # of Gaussian
@@ -107,7 +107,7 @@ threshold="0.010"
 #			  Timelapse registration 
 #-------------------------------------------------------------------------------
 
-timelapse_timepoint="1-19"
+timelapse_timepoint="1-2"
  
 #------------------------------------------------------------------------------- 
 #		      Dublicate Registration files 
@@ -133,18 +133,16 @@ channel_target="0"
 #
 #-------------------------------------------------------------------------------
   
-registration_fusion="\"Time-point registration (reference=${referencetp}) of \
-channel 0\""	
-registration_fusion1="\"Time-point registration (reference=${referencetp}) of \
-channel 1\""
+registration_fusion="\"Time-point registration (reference=${referencetp}) of channel 0\""	
+#registration_fusion1="\"Time-point registration (reference=${referencetp}) of channel 1\""
 
-downsample_output="1"                   # Downsampling
-x="4"		                        # Cropping parameters of full resolution
-y="310"
-z="280"
-w="1848"
-h="698"
-d="710"
+downsample_output="2"                   # Downsampling
+x="70"		                        # Cropping parameters of full resolution
+y="244"
+z="380"
+w="1664"
+h="766"
+d="1080"
  
 #------------------------------------------------------------------------------- 
 #          External transformation for multi-view deconvolution
@@ -154,9 +152,9 @@ d="710"
 # 
 #-------------------------------------------------------------------------------
 
-#pattern_extrans="spim_TL{t}_Angle{a}.tif"         # pattern of SPIM data
+#pattern_extrans="spim_TL{tt}_Angle{a}.tif"         # pattern of SPIM data
 
-external_transformation_timepoint="1-200" 	  # Timepoints
+external_transformation_timepoint="1-2" 	  # Timepoints
 m00="0.5" 					  # Downsampling 
 m11="0.5"                                         # For downsampling 2x use 0.5
 m22="0.5"
@@ -170,17 +168,17 @@ m22="0.5"
 # multi: pattern_deconvo="spim_TL{tt}_Angle{a}_Channel1.tif"
 #-------------------------------------------------------------------------------
 
-pattern_deconvo="spim_TL{t}_Angle{a}.tif"   # Pattern
+pattern_deconvo="spim_TL{tt}_Angle{a}.tif"   # Pattern
 
 iter="10"				    # Number of iterations
 psf_estimation="\"Extract from beads\""     # PSF parameters 
 # psf_estimation=                           # Does not work yet!
-decox="19" 				    # Cropping parameters: 
-decoy="181"				       # if downsampled divide 
-decoz="143"				       # fusion cropping parameters 
-decow="928"				       # by this factor
-decoh="405"
-decod="447"
+decox="70" 				    # Cropping parameters: 
+decoy="122"				       # if downsampled divide 
+decoz="190"				       # fusion cropping parameters 
+decow="832"				       # by this factor
+decoh="383"
+decod="540"
  
 #------------------------------------------------------------------------------- 
 #				    Rendering 
@@ -197,8 +195,8 @@ decod="447"
 jobs_rendering=${job_directory}"/3d_rendering_cpu"  # directory
 rendering=${jobs_rendering}"/single-render-mov.bsh" # script single or 
 						    # multi-channel
-source_rendering="/output"                   # source
-target_rendering="/rendering"                # target directory
+source_rendering="/fusion_output"                   # source
+target_rendering="/fusion_rendering"                # target directory
 nframes="6"                                  # nframes for rotation 
 
 #--- Settings single channel ---------------------------------------------------
@@ -230,26 +228,24 @@ maximum_rendering="0.005"                    # Max single channel
 
 target_hdf5="/hdf5/"				             # Target directory
 num_export_job="`seq 0 11`"			             # Number of jobs
-exportXmlFilename="\"${target_hdf5}2014-04-21_Stock14_Stock19.xml\"" # xml file
+exportXmlFilename="\"${target_hdf5}2013-11-14_His-YFP.xml\"" # xml file
 								     # name
-channels_export="\"0,1\""				     # Channels
-timepoint_export="\"1-19\""				     # timepoints
+channels_export="\"0\""				     # Channels
+timepoint_export="\"1-2\""				     # timepoints
 filepath="\"/output/\""				# directory of fused data
 filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data	
 								 # pattern
-export_numSlices="710"
+export_numSlices="539"
 sliceValueMin="0"			# Minimal intensity histogram
 sliceValueMax="60000"			# Maximal intensity histogram
-cropOffsetX="4"				# x crop
-cropOffsetY="310"			# y crop
-cropOffsetZ="280" 			# z crop
-scale="1"				# downsample factor
+cropOffsetX="140"				# x crop
+cropOffsetY="244"			# y crop
+cropOffsetZ="380" 			# z crop
+scale="2"				# downsample factor
 
 #===============================================================================
 # Directories for scripts and advanced settings for processing 
 #===============================================================================
- 
-job_directory="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0"
 
 #-------------------------------------------------------------------------------
 # Fiji settings 
