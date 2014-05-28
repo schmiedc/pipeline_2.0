@@ -16,7 +16,8 @@ blending = System.getProperty( "blending" );
 weights = System.getProperty( "weights" );
 downsample_output = Integer.parseInt( System.getProperty( "downsample_output" ) );
 registration_fusion = System.getProperty( "registration_fusion" );
-registration_fusion1 = System.getProperty( "registration_fusion1" );
+//2nd fusion command comment out for single channel
+//registration_fusion1 = System.getProperty( "registration_fusion1" );
 
 x = System.getProperty( "x" );
 y = System.getProperty( "y" );
@@ -44,15 +45,15 @@ System.out.println( "fused_image_output=" + fused_image_output );
 
 IJ.run("Multi-view fusion", "select_channel=" + select_channel + " " + 
 	"registration=[" + registration_fusion + "]" + " " +
-	"registration=[" + registration_fusion1 + "]" + " " +		//Comment out for Single-Channel fusion
+//	"registration=[" + registration_fusion1 + "]" + " " +		//Comment out for Single-Channel fusion
 	"spim_data_directory=" + dir + " " +
 	"pattern_of_spim=" + pattern_of_spim + " " +
 	"timepoints_to_process=" + timepoint + " " +
 	"angles=" + angles + " " +
 	"fusion_method=[" + fusion_method + "]" + " " +
 	"process_views_in_paralell=" + process_views_in_paralell + " " + 
-//	" + blending + " + " " +
-//	" + weights + " + " " +
+	" + blending + " + " " +
+	" + weights + " + " " +
 	"downsample_output=" + downsample_output + " " + 
 	"crop_output_image_offset_x=" + x + " " +
 	"crop_output_image_offset_y=" + y + " " +

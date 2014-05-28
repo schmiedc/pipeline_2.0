@@ -227,15 +227,15 @@ maximum_rendering="0.005"                    # Max single channel
 #-------------------------------------------------------------------------------
 
 target_hdf5="/hdf5/"				             # Target directory
-num_export_job="`seq 0 11`"			             # Number of jobs
+num_export_job="`seq 0 2`"			             # Number of jobs
 exportXmlFilename="\"${target_hdf5}2013-11-14_His-YFP.xml\"" # xml file
 								     # name
 channels_export="\"0\""				     # Channels
 timepoint_export="\"1-2\""				     # timepoints
-filepath="\"/output/\""				# directory of fused data
+filepath="\"/fusion_output/\""				# directory of fused data
 filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data	
 								 # pattern
-export_numSlices="539"
+export_numSlices="540"
 sliceValueMin="0"			# Minimal intensity histogram
 sliceValueMax="60000"			# Maximal intensity histogram
 cropOffsetX="140"				# x crop
