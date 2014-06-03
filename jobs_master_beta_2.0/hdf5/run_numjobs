@@ -18,5 +18,5 @@ job="$jobs_export/getnumjobs"
 
 chmod a+x "$job"
 
-bsub -q short -n 1 -R span[hosts=1] -o "numjobsout" -e "output/err.%J" "$job"
+bsub -q short -n 1 -R rusage[mem=50000] -R span[hosts=1] -o "numjobsout" -e "output/err.%J" "$job"
 

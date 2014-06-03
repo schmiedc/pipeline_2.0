@@ -12,7 +12,7 @@ for i in $timepoint
 
 do
 
-for a in $angles_split
+for a in $angle_prep
 
 do
           	job="$jobs_split/split-$i-$a.job"

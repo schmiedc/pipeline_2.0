@@ -24,20 +24,20 @@
 # 	multi channel: pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif"
 #-------------------------------------------------------------------------------
 
-dir="/projects/pilot_spim/Christopher/Test_scripts/multi-channel/" # Data 
+dir="/projects/pilot_spim/Christopher/2014-04-22_Stock19_Stock17_2/" # Data 
                    					     # directory
 job_directory="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0"
-timepoint="`seq 1 3`"                                 # timepoints
+timepoint="`seq 1 23`"                                 # timepoints
 angles="1,2,3,4,5"                                    # angles
 num_angles="5" 					      # number of angles
-pattern_of_spim="spim_TL{tt}_Angle{a}.tif" # pattern of spim
+pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif" # pattern of spim
 						      # for padded zeros use tt
-select_channel="Multi-channel"          # "Single-channel" or "Multi-channel" 
+select_channel="Multi-Channel"          # Single or multi channel
 Channel_beads="1"			# Channel that contains the beads						      
 pad="2"						      # For padded zeros
-referencetp="1"					      # reference timepoint 
+referencetp="8"					      # reference timepoint 
 xy_resolution="1"				      # Manual calibration xy
-z_scaling="3.481975"   			      # Manual calibration z
+z_scaling="3.448275862"   			      # Manual calibration z
  
 #-------------------------------------------------------------------------------
 #                           Preprocessing 
@@ -53,11 +53,11 @@ z_scaling="3.481975"   			      # Manual calibration z
 #--- Renaming czi files --------------------------------------------------------
 
 first_index="0"                                       # First index of czi files
-last_index="14"					      # Last index
+last_index="114"					      # Last index
 first_timepoint="1"                                   # The first timepoint 
 angles_renaming=(1 2 3 4 5)                           # Angles
 						      						      
-source_pattern=/2014-02-14_Stock19_Stock17\(\{index\}\).czi
+source_pattern=/2014-04-22_Stock19_Stock17\(\{index\}\).czi
 target_pattern=/spim_TL\{timepoint\}_Angle\{angle\}.czi
  
 #--- Resaving and splitting  ---------------------------------------------------
@@ -97,7 +97,7 @@ pattern_switch="\"spim_"$padding"_Angle{a}${c2}.tif\""
 type_of_detection="\"Difference-of-Mean (Integral image based)\"" # Difference
 radius1="2"							  # of Mean 
 radius2="3"
-threshold="0.009"
+threshold="0.010"
 
 # type_of_detection="\"Difference-of-Gaussian\""		  # Difference 	
 # initial_sigma="1.8000"					  # of Gaussian
@@ -107,7 +107,7 @@ threshold="0.009"
 #			  Timelapse registration 
 #-------------------------------------------------------------------------------
 
-timelapse_timepoint="1-3"
+timelapse_timepoint="1-23"
  
 #------------------------------------------------------------------------------- 
 #		      Dublicate Registration files 
@@ -136,13 +136,13 @@ channel_target="0"
 registration_fusion="\"Time-point registration (reference=${referencetp}) of channel 0\""	
 #registration_fusion1="\"Time-point registration (reference=${referencetp}) of channel 1\""
 
-downsample_output="2"                   # Downsampling
-x="0"		                        # Cropping parameters of full resolution
-y="314"
-z="320"
-w="1858"
-h="758"
-d="740"
+downsample_output="1"                   # Downsampling
+x="34"		                        # Cropping parameters of full resolution
+y="252"
+z="300"
+w="1866"
+h="782"
+d="700"
  
 #------------------------------------------------------------------------------- 
 #          External transformation for multi-view deconvolution
@@ -173,12 +173,12 @@ pattern_deconvo="spim_TL{tt}_Angle{a}.tif"   # Pattern
 iter="10"				    # Number of iterations
 psf_estimation="\"Extract from beads\""     # PSF parameters 
 # psf_estimation=                           # Does not work yet!
-decox="0" 				    # Cropping parameters: 
-decoy="157"				       # if downsampled divide 
-decoz="160"				       # fusion cropping parameters 
-decow="929"				       # by this factor
-decoh="379"
-decod="370"
+decox="70" 				    # Cropping parameters: 
+decoy="122"				       # if downsampled divide 
+decoz="190"				       # fusion cropping parameters 
+decow="832"				       # by this factor
+decoh="383"
+decod="540"
  
 #------------------------------------------------------------------------------- 
 #				    Rendering 
@@ -205,12 +205,11 @@ minimum_rendering="0.5"                      # Min single channel
 maximum_rendering="0.005"                    # Max single channel
 
 #--- Settings multi channel ----------------------------------------------------
-
-min_ch0=0.9 				     # Min channel 0 multi channel
-max_ch0=0.01				     # Max channel 0 multi channel
-min_ch1=0.9			             # Min channel 1 multi channel
-max_ch1=0.01                               # Max channel 1 multi channel
-zSlices="369" 			     # For multi-channel rendering:
+# min_ch0=0.9 				     # Min channel 0 multi channel
+# max_ch0=0.01				     # Max channel 0 multi channel
+# min_ch1=0.9			             # Min channel 1 multi channel
+# max_ch1=0.01                               # Max channel 1 multi channel
+# zSlices="369" 			     # For multi-channel rendering:
  
 #--- Orientation or rotation ---------------------------------------------------
 # rotation_lateral: 3d-affine: (0.9736341, -0.090486586, 0.2094066, 0.0, 
@@ -227,22 +226,22 @@ zSlices="369" 			     # For multi-channel rendering:
 #                   multi: channels_export="\"0,1\""
 #-------------------------------------------------------------------------------
 
-target_hdf5="/hdf5/"				             # Target directory
-num_export_job="`seq 0 3`"			             # Number of jobs
-exportXmlFilename="\"${target_hdf5}2013-11-14_His-YFP.xml\"" # xml file
+target_hdf5="/hdf5_noblending_noweight/"				             # Target directory
+num_export_job="`seq 0 13`"			             # Number of jobs
+exportXmlFilename="\"${target_hdf5}2014-04-22_Stock19_Stock17_bare.xml\"" # xml file
 								     # name
 channels_export="\"0,1\""				     # Channels
-timepoint_export="\"1-3\""				     # timepoints
-filepath="\"/output/\""				# directory of fused data
+timepoint_export="\"1-23\""				     # timepoints
+filepath="\"/output_blending_weights/\""				# directory of fused data
 filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data	
 								 # pattern
-export_numSlices="376"
+export_numSlices="700"
 sliceValueMin="0"			# Minimal intensity histogram
 sliceValueMax="60000"			# Maximal intensity histogram
-cropOffsetX="100"				# x crop
-cropOffsetY="226"			# y crop
-cropOffsetZ="355" 			# z crop
-scale="2"				# downsample factor
+cropOffsetX="34"				# x crop
+cropOffsetY="252"			# y crop
+cropOffsetZ="300" 			# z crop
+scale="1"				# downsample factor
 
 #===============================================================================
 # Directories for scripts and advanced settings for processing 
