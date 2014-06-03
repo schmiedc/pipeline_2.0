@@ -12,9 +12,9 @@ channel_target=${channel_target}
 
 for i in $timepoint
 do 
-	i=`printf "%0${pad_resave}d" "$i"`	
+	i=`printf "%0${pad}d" "$i"`	
 	
-	for a in $angles_split
+	for a in $angle_prep
   		do
    
 			for end in "beads.txt" "dim" "registration" "$ref" 
