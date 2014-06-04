@@ -54,7 +54,7 @@ IJ.run("Multi-view deconvolution", "spim_data_directory=" + dir + " " +
 	"pattern_of_spim=" + pattern_of_spim + " " + 
 	"timepoints_to_process=" + timepoint + " " +
 	"angles=" + angles + " " + 
-	"registration=[Time-point registration (reference=" + referencetp + ") of channel 0]" + " " +
+	"registration=[Time-point registration (reference=" + referencetp + ") of channel 1]" + " " +
 	"crop_output_image_offset_x=" + x + " " +
 	"crop_output_image_offset_y=" + y + " " +
 	"crop_output_image_offset_z=" + z + " " +
