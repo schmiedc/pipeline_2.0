@@ -11,7 +11,7 @@
 #        NOTES: ---
 #      Version: 1.1
 #      CREATED: 2014-04-02
-#     REVISION: 2014-05-16
+#     REVISION: 2014-06-05
 #===============================================================================
  
 #------------------------------------------------------------------------------- 
@@ -24,20 +24,20 @@
 # 	multi channel: pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif"
 #-------------------------------------------------------------------------------
 
-dir="/projects/pilot_spim/Christopher/Test_scripts/multi-channel/" # Data 
+dir="/projects/pilot_spim/Christopher/Test_scripts/single-channel/" # Data 
                    					           # directory
 job_directory="/projects/pilot_spim/Christopher/pipeline/jobs_master_beta_2.0"
-timepoint="`seq 1 2`"                          # timepoints format: "`seq 1 3`" 
-angles="1,2,3,4,5"                             # angles format: "1,2,3" or "1-3"
-num_angles="5" 					      # number of angles
-pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif" # pattern of spim
-						      # for padded zeros use tt
-select_channel="Multi-channel"          # "Single-channel" or "Multi-channel" 
+timepoint="`seq 1 2`"                   # timepoints format: "`seq 1 3`" 
+angles="1,2,3"                          # angles format: "1,2,3" or "1-3"
+num_angles="3" 					# number of angles
+pattern_of_spim="spim_TL{tt}_Angle{a}.tif" 	# pattern of spim
+						# for padded zeros use tt
+select_channel="Single-channel"     	# "Single-channel" or "Multi-channel" 
 Channel_beads="1"			# Channel that contains the beads						      
-pad="2"						      # For padded zeros
-referencetp="1"					      # reference timepoint 
-xy_resolution="1"				      # Manual calibration xy
-z_scaling="3.481975"   			      # Manual calibration z
+pad="2"						      	# For padded zeros
+referencetp="1"					      	# reference timepoint 
+xy_resolution="1"				      	# Manual calibration xy
+z_scaling="3.264352"   			      		# Manual calibration z
  
 #-------------------------------------------------------------------------------
 #                           Preprocessing 
@@ -52,17 +52,17 @@ z_scaling="3.481975"   			      # Manual calibration z
 
 #--- Renaming czi files --------------------------------------------------------
 
-first_index="0"                                       # First index of czi files
-last_index="14"					      # Last index
-first_timepoint="1"                                   # The first timepoint 
-angles_renaming=(1 2 3 4 5)                           # Angles format: (1 2 3)
+first_index="0"                                 # First index of czi files
+last_index="5"					# Last index
+first_timepoint="1"                          	# The first timepoint 
+angles_renaming=(1 2 3)                         # Angles format: (1 2 3)
 						      						      
-source_pattern=/2014-02-14_Stock19_Stock17\(\{index\}\).czi
+source_pattern=/2013-11-14_His-YFP\(\{index\}\).czi 	# Change name of file
 target_pattern=/spim_TL\{timepoint\}_Angle\{angle\}.czi
  
 #--- Resaving and splitting  ---------------------------------------------------
 
-angle_prep="1 2 3 4 5"  # angles format: "1 2 3"
+angle_prep="1 2 3"  # angles format: "1 2 3"
 
 #=== Function ==================================================================
 # 	 NAME: channel switch
@@ -95,7 +95,7 @@ pattern_switch="\"spim_"$padding"_Angle{a}${c2}.tif\""
 type_of_detection="\"Difference-of-Mean (Integral image based)\"" # Difference
 radius1="2"							  # of Mean 
 radius2="3"
-threshold="0.009"
+threshold="0.004"
 
 # type_of_detection="\"Difference-of-Gaussian\""		  # Difference 	
 # initial_sigma="1.8000"					  # of Gaussian
@@ -132,15 +132,15 @@ channel_target="0"
 #-------------------------------------------------------------------------------
   
 registration_fusion="\"Time-point registration (reference=${referencetp}) of channel 0\""	
-registration_fusion1="\"Time-point registration (reference=${referencetp}) of channel 1\""
+#registration_fusion1="\"Time-point registration (reference=${referencetp}) of channel 1\""
 
 downsample_output="2"                   # Downsampling
-x="0"		                        # Cropping parameters of full resolution
-y="314"
-z="320"
-w="1858"
-h="758"
-d="740"
+x="60"		                        # Cropping parameters of full resolution
+y="126"
+z="200"
+w="824"
+h="376"
+d="540"
  
 #------------------------------------------------------------------------------- 
 #          External transformation for multi-view deconvolution
@@ -163,18 +163,18 @@ m22="0.5"
 # single: pattern_deconvo="spim_TL{t}_Angle{a}.tif"
 # multi: pattern_deconvo="spim_TL{tt}_Angle{a}_Channel1.tif"
 #-------------------------------------------------------------------------------
+	
+pattern_deconvo="spim_TL{tt}_Angle{a}.tif"   	# Pattern
 
-pattern_deconvo="spim_TL{tt}_Angle{a}_Channel1.tif"   # Pattern
-
-iter="1"				    # Number of iterations
-psf_estimation="\"Extract from beads\""     # PSF parameters 
-# psf_estimation=                           # Does not work yet!
-decox="0" 				    # Cropping parameters: 
-decoy="157"				       # if downsampled divide 
-decoz="160"				       # fusion cropping parameters 
-decow="929"				       # by this factor
-decoh="379"
-decod="370"
+iter="2"					# Number of iterations
+psf_estimation="\"Extract from beads\""     	# PSF parameters 
+# psf_estimation=                           	# Does not work yet!
+decox="30" 				    	# Cropping parameters: 
+decoy="63"				       	# if downsampled divide 
+decoz="100"				       	# fusion cropping parameters 
+decow="412"				       	# by this factor
+decoh="188"
+decod="270"
  
 #------------------------------------------------------------------------------- 
 #				    Rendering 
@@ -188,25 +188,25 @@ decod="370"
 
 #--- General settings ----------------------------------------------------------
 
-jobs_rendering=${job_directory}"/3d_rendering_cpu"  # directory
-rendering=${jobs_rendering}"/multi-render-mov.bsh" # script single or 
-						    # multi-channel
-source_rendering="/fusion_output"                   # source
-target_rendering="/fusion_rendering"                # target directory
-nframes="6"                                  # nframes for rotation 
+jobs_rendering=${job_directory}"/3d_rendering_cpu"  	# directory
+rendering=${jobs_rendering}"/single-render-mov.bsh" 	# script single or 
+						    	# multi-channel
+source_rendering="/fusion_output"                   	# source
+target_rendering="/fusion_rendering"                	# target directory
+nframes="6"                                  		# nframes for rotation 
 
 #--- Settings single channel ---------------------------------------------------
 
-minimum_rendering="0.5"                      # Min single channel
-maximum_rendering="0.005"                    # Max single channel
+minimum_rendering="0.5"                      		# Min single channel
+maximum_rendering="0.005"                    		# Max single channel
 
 #--- Settings multi channel ----------------------------------------------------
 
-min_ch0=0.9 				     # Min channel 0 multi channel
-max_ch0=0.01				     # Max channel 0 multi channel
-min_ch1=0.9			             # Min channel 1 multi channel
-max_ch1=0.01                               # Max channel 1 multi channel
-zSlices="369" 			     # For multi-channel rendering:
+min_ch0=0.9 				     	# Min channel 0 multi channel
+max_ch0=0.01				     	# Max channel 0 multi channel
+min_ch1=0.9			             	# Min channel 1 multi channel
+max_ch1=0.01                               	# Max channel 1 multi channel
+zSlices="369" 			     		# For multi-channel rendering
  
 #--- Orientation or rotation ---------------------------------------------------
 # rotation_lateral: 3d-affine: (0.9736341, -0.090486586, 0.2094066, 0.0, 
@@ -225,14 +225,14 @@ zSlices="369" 			     # For multi-channel rendering:
 
 target_hdf5="/hdf5/"				             # Target directory
 num_export_job="`seq 0 2`"			             # Number of jobs
-exportXmlFilename="\"${target_hdf5}2013-11-14_His-YFP.xml\"" # xml file
-								     # name
-channels_export="\"0,1\""				     # Channels
+exportXmlFilename="\"${target_hdf5}2013-11-14_His-YFP.xml\"" 	# xml file
+								# name
+channels_export="\"0\""				     # Channels
 timepoint_export="\"1-2\""				     # timepoints
-filepath="\"/fusion_output/\""				# directory of fused data
+filepath="\"/fusion_output/\""			# directory of fused data
 filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data	
 								 # pattern
-export_numSlices="369"
+export_numSlices="269"
 sliceValueMin="0"			# Minimal intensity histogram
 sliceValueMax="60000"			# Maximal intensity histogram
 cropOffsetX="0"				# x crop
