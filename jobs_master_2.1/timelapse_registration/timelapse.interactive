@@ -1,0 +1,11 @@
+#!/bin/bash
+source /projects/tomancak_lightsheet/Christopher/master/master
+
+$XVFB_RUN -a $Fiji -Dtype_of_registration=$type_of_registration \
+	-Dtype_of_detection=$timelapse_type_of_detection -Ddir=$dir -Dpattern=$pattern_of_spim \
+	-Dtimepoint=$timelapse_timepoint -Dangles=$angles \
+	-Dsubpixel_localization=$timelapse_subpixel_localization -Dxy_resolution=$xy_resolution \
+	-Dz_scaling=$z_scaling -Dtransformation_model=$transformation_model -Dimglib_container=$timelapse_imglib_container\
+	-Dradius1=$radius1 -Dradius2=$radius2 -Dthreshold=$threshold\
+	-Dinitial_sigma=$initial_sigma -Dthreshold_gaussian=$threshold_gaussian \
+	-Dreferencetp=$referencetp -- --no-splash $timelapse_registration

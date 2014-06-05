@@ -1,0 +1,23 @@
+#!/bin/bash
+source /projects/pilot_spim/Christopher/pipeline/master
+
+mkdir -p $jobs_fusion
+
+for i in $timepoint
+
+do
+	job="$jobs_fusion/fusion-$i.job"
+	echo $job
+	echo "#!/bin/bash" > "$job"
+	echo "$XVFB_RUN -a $Fiji -Xms100g -Xmx100g -Dselect_channel=$select_channel \
+		-Dregistration_fusion=$registration_fusion -Ddir=$dir \
+		-Dregistration_fusion1=$registration_fusion1 \
+		-Dpattern_of_spim=$pattern_of_spim -Dtimepoint=$i -Dangles=$angles \
+		-Dfusion_method=$fusion_method -Dprocess_views_in_paralell=$process_views_in_paralell \
+		-Dblending=$blending -Dweights=$weights -Ddownsample_output=$downsample_output \
+		-Dx=$x -Dy=$y -Dz=$z -Dw=$w -Dh=$h -Dd=$d -Dfused_image_output=$fused_image_output\
+		-- --no-splash $fusion" >> "$job"
+	chmod a+x "$job"
+done
+
+
