@@ -6,7 +6,7 @@ source /projects/pilot_spim/Christopher/pipeline/master
 for i in $timepoint
 
 	do
-		i=`printf "%0${pad_resave}d" "$i"`
+		i=`printf "%0${pad}d" "$i"`
 		num=$(ls $dir/spim_TL"$i"_Angle*.tif |wc -l)
 
 			if [ $num  -ne $num_angles ]

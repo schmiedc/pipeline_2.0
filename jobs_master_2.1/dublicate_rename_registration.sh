@@ -21,7 +21,7 @@ do
    				do
 
 		#echo $dir/registration/spim_TL"$i"_Angle"$a"_Channel"${channel_source}".tif."$end" $dir/registration/spim_TL"$i"_Angle"$a"_Channel"${channel_target}".tif."$end"
-		cp $dir/registration/spim_TL"$i"_Angle"$a"_Channel1.tif."$end" $dir/registration/spim_TL"$i"_Angle"$a"_Channel0.tif."$end"
+		cp $dir/registration/spim_TL"$i"_Angle"$a"_Channel"${channel_source}".tif."$end" $dir/registration/spim_TL"$i"_Angle"$a"_Channel"${channel_target}".tif."$end"
    
 	done
 
