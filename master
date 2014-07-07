@@ -162,19 +162,25 @@ m22="0.5"
 # For multichannel data specify correct pattern:
 # single: pattern_deconvo="spim_TL{t}_Angle{a}.tif"
 # multi: pattern_deconvo="spim_TL{tt}_Angle{a}_Channel1.tif"
+#
+# For Multi channel: specify channel that is deconvolved 
+# registration_deco=""\"Time-point registration (reference=${referencetp}) of channel 0\""
+# registration_deco=""\"Time-point registration (reference=${referencetp}) of channel 1\""
 #-------------------------------------------------------------------------------
 	
 pattern_deconvo="spim_TL{tt}_Angle{a}_Channel0.tif"   	# Pattern
 
+registration_deco="\"Time-point registration (reference=${referencetp}) of channel 0\""
+
 iter="10"					# Number of iterations
 psf_estimation="\"Extract from beads\""     	# PSF parameters 
 # psf_estimation=                           	# Does not work yet!
-decox="334" 				    	# Cropping parameters: 
-decoy="6"				       	# if downsampled divide 
-decoz="284"				       	# fusion cropping parameters 
-decow="774"				       	# by this factor
-decoh="1870"
-decod="896"
+decox="167" 				    	# Cropping parameters: 
+decoy="3"				       	# if downsampled divide 
+decoz="142"				       	# fusion cropping parameters 
+decow="387"				       	# by this factor
+decoh="935"
+decod="448"
  
 #------------------------------------------------------------------------------- 
 #				    Rendering 
