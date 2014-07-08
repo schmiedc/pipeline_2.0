@@ -243,13 +243,13 @@ filepath="\"/output/\""			# directory of fused data
 #filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data	
 filepattern="\"%1\\\$d/DC(l=6.0E-4)_t%1\\\$d_ch%2\\\$d_%3\\\$03d.tif\""  # pattern
 
-export_numSlices="895"
+export_numSlices="447"
 sliceValueMin="0"			# Minimal intensity histogram
 sliceValueMax="2"			# Maximal intensity histogram
-cropOffsetX="334"				# x crop
-cropOffsetY="6"			# y crop
-cropOffsetZ="284" 			# z crop
-scale="1"				# downsample factor
+cropOffsetX="167"				# x crop
+cropOffsetY="3"			# y crop
+cropOffsetZ="142" 			# z crop
+scale="2"				# downsample factor
 
 #===============================================================================
 # Directories for scripts and advanced settings for processing 
