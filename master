@@ -169,7 +169,6 @@ m22="0.5"
 #-------------------------------------------------------------------------------
 	
 pattern_deconvo="spim_TL{tt}_Angle{a}_Channel0.tif"   	# Pattern
-
 registration_deco="\"Time-point registration (reference=${referencetp}) of channel 0\""
 
 iter="10"					# Number of iterations
@@ -231,26 +230,29 @@ zSlices="369" 			     		# For multi-channel rendering
 # Content based fusion (fusion) or deconvolution (decon) output file pattern:
 # fusion: filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\""
 # decon: filepattern="\"%1\\\$d/DC(l=6.0E-4)_t%1\\\$d_ch%2\\\$d_%3\\\$03d.tif\""
+#
+# Scale for deconvolution output is always 1! Since the downsampling is in the
+# Registration files. Use Downsampled crop values as for deconvolution.
 #-------------------------------------------------------------------------------
 
 target_hdf5="/hdf5/"				             # Target directory
 num_export_job="`seq 0 26`"			             # Number of jobs
 exportXmlFilename="\"${target_hdf5}2014-06-12_Stock14_Stock19.xml \"" 	# xml file
-								# name
-channels_export="\"0\""				     # Channels
-timepoint_export="\"1-50\""				     # timepoints
+									# name
+channels_export="\"0\""			# Channels
+timepoint_export="\"1-50\""		# timepoints
 filepath="\"/output/\""			# directory of fused data
-#filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data	
-filepattern="\"%1\\\$d/DC(l=6.0E-4)_t%1\\\$d_ch%2\\\$d_%3\\\$03d.tif\""  # pattern
+#filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data pattern
+filepattern="\"%1\\\$d/DC(l=6.0E-4)_t%1\\\$d_ch%2\\\$d_%3\\\$03d.tif\""  # deconvolved data pattern
 
-export_numSlices="447"
+export_numSlices="447"			# Number of slices of output
 sliceValueMin="0"			# Minimal intensity histogram
 sliceValueMax="2"			# Maximal intensity histogram
-cropOffsetX="167"				# x crop
-cropOffsetY="3"			# y crop
+cropOffsetX="167"			# x crop
+cropOffsetY="3"				# y crop
 cropOffsetZ="142" 			# z crop
-scale="2"				# downsample factor
-
+scale="1"				# downsample factor. 
+					# For deconvolution =1
 #===============================================================================
 # Directories for scripts and advanced settings for processing 
 #===============================================================================
