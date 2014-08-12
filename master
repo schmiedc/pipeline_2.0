@@ -245,12 +245,12 @@ filepath="\"/output/\""			# directory of fused data
 #filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data pattern
 filepattern="\"%1\\\$d/DC(l=6.0E-4)_t%1\\\$d_ch%2\\\$d_%3\\\$03d.tif\""  # deconvolved data pattern
 
-export_numSlices="447"			# Number of slices of output
 sliceValueMin="0"			# Minimal intensity histogram
 sliceValueMax="2"			# Maximal intensity histogram
 cropOffsetX="167"			# x crop
 cropOffsetY="3"				# y crop
 cropOffsetZ="142" 			# z crop
+export_numSlices="447"                  # Number of slices of output
 scale="1"				# downsample factor. 
 					# For deconvolution =1
 #===============================================================================
