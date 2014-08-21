@@ -11,7 +11,7 @@ do
 	do
 		job="$jobs_resaving/resave-$i-$a.job"
 		echo $job
-		echo "$XVFB_RUN -a $Fiji -Ddir=$dir -Dtimepoint=$i -Dangle=$a \
+		echo "$XVFB_RUN -a $Fiji_resave -Ddir=$dir -Dtimepoint=$i -Dangle=$a \
 			-Dpad=$pad -- --no-splash $resaving" >> "$job"
 		chmod a+x "$job"
 	done

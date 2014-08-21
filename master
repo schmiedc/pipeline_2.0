@@ -271,6 +271,7 @@ Fiji="/sw/users/schmied/packages/Fiji.app.cuda/ImageJ-linux64" # Fiji
 
 #--- Resaving .czi into .tif files----------------------------------------------
 
+Fiji_resave="/sw/users/schmied/lifeline/Fiji.app.lifeline2/ImageJ-linux64" # Fiji that works for resaving
 jobs_resaving=${job_directory}"/czi_resave/" 			# directory
 resaving=${jobs_resaving}"/resaving.bsh" 			# script
  
