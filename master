@@ -243,7 +243,7 @@ zSlices="369" 			     		# For multi-channel rendering
 
 target_hdf5="/hdf5/"				             # Target directory
 num_export_job="`seq 0 26`"			             # Number of jobs
-exportXmlFilename="\"${target_hdf5}2014-06-12_Stock14_Stock19.xml \"" 	# xml file
+exportXmlFilename="\"${target_hdf5}2014-06-12_Stock14_Stock19\"" 	# xml file
 									# name
 channels_export="\"0\""			# Channels
 timepoint_export="\"1-50\""		# timepoints
