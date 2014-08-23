@@ -184,6 +184,11 @@ decod="448"
 #------------------------------------------------------------------------------- 
 #				    Rendering 
 # 
+# Different file names of fused or deconvolved data
+#
+# name_rendering="img"  Content based fusion data
+# name_rendering="DC"   Deconvolved data
+#
 # One working scripts for single channel and one for multi-channel: 
 # 	single: single-render-mov.bsh
 # 	multi: multi-render-mov.bsh
@@ -193,6 +198,7 @@ decod="448"
 
 #--- General settings ----------------------------------------------------------
 
+name_rendering="img"					# fused="img" deconvo="DC"
 jobs_rendering=${job_directory}"/3d_rendering_cpu"  	# directory
 rendering=${jobs_rendering}"/single-render-mov.bsh" 	# script single or 
 						    	# multi-channel

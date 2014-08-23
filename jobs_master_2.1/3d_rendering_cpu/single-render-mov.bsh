@@ -13,6 +13,7 @@ import ij.process.StackStatistics;
 
 runtime = Runtime.getRuntime();
 
+name_rendering = System.getProperty( "name_rendering" );
 dir = System.getProperty( "dir" );
 timepoint = Integer.parseInt( System.getProperty( "timepoint" ) );
 int nFrames = Integer.parseInt( System.getProperty( "nframes" ) );
@@ -21,6 +22,7 @@ float minimum_rendering = Float.parseFloat( System.getProperty( "minimum_renderi
 float maximum_rendering = Float.parseFloat( System.getProperty( "maximum_rendering" ));
 
 System.out.println( "Opening" );
+System.out.println( "name_rendering=" + name_rendering );
 System.out.println( "dir=" + dir );
 System.out.println( "timepoint=" + timepoint);
 System.out.println( "Number of frames=" + nFrames );
@@ -29,7 +31,7 @@ System.out.println( "MinMax=" + minimum_rendering + " " + maximum_rendering );
 
 IJ.run("Image Sequence...", "open=" + dir + "/" + timepoint + " " +
         "number=1000 starting=1 increment=1 scale=100" + " " +
-        "file=img" + " " +
+        "file=" + name_rendering + " " +
         "or=[] sort");
 
 imp = IJ.getImage();
