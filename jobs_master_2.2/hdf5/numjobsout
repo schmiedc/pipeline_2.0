@@ -1,0 +1,220 @@
+Sender: LSF System <hpcadmin@n15>
+Subject: Job 545432: </projects/pilot_spim/Christopher/pipeline/jobs_master_2.1/hdf5//getnumjobs> in cluster scuba_cluster1 Done
+
+Job </projects/pilot_spim/Christopher/pipeline/jobs_master_2.1/hdf5//getnumjobs> was submitted from host <madmax> by user <schmied> in cluster <scuba_cluster1>.
+Job was executed on host(s) <n15>, in queue <short>, as user <schmied> in cluster <scuba_cluster1>.
+</home/schmied> was used as the home directory.
+</projects/pilot_spim/Christopher/pipeline/jobs_master_2.1/hdf5> was used as the working directory.
+Started at Tue Jul  8 15:50:15 2014
+Results reported at Tue Jul  8 15:50:39 2014
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/projects/pilot_spim/Christopher/pipeline/jobs_master_2.1/hdf5//getnumjobs
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time   :      4.66 sec.
+    Max Memory :         2 MB
+    Max Swap   :        32 MB
+
+    Max Processes  :         1
+    Max Threads    :         1
+
+The output (if any) follows:
+
+path=/projects/pilot_spim/Christopher/2014-06-21_Stock14_Stock19/
+Xml Filename=/projects/pilot_spim/Christopher/2014-06-21_Stock14_Stock19//hdf5/2014-06-12_Stock14_Stock19.xml 
+inputFilePattern=spim_TL{tt}_Angle{a}_Channel{c}.tif
+channels=0
+angles=1,2,3,4,5
+timepoints=1-50
+referenceTimePoint=40
+overrideImageZStretching=true
+zStretching=5.172413
+filepath=/projects/pilot_spim/Christopher/2014-06-21_Stock14_Stock19//output/
+filepattern=%1$d/DC(l=6.0E-4)_t%1$d_ch%2$d_%3$03d.tif
+sliceValueMin=0
+sliceValueMax=2
+cropOffsetX=334
+cropOffsetY=6
+cropOffsetZ=284
+scale=1
+ChannelPattern: 0
+Channels: (0)
+ChannelsToRegister: 0
+ChannelsRegister: (0)
+ChannelsToFuse: 0
+ChannelsFuse: (0)
+(Tue Jul 08 15:50:34 CEST 2014): Loading timepoint 1
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 2
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 3
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 4
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 5
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 6
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 7
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 8
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 9
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 10
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 11
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 12
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 13
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 14
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 15
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 16
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 17
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 18
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 19
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 20
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 21
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 22
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 23
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 24
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 25
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 26
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 27
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 28
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 29
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 30
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 31
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 32
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 33
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 34
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 35
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 36
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 37
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 38
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 39
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 40
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 41
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 42
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 43
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 44
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 45
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 46
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 47
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 48
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 49
+Using model: mpicbg.models.AffineModel3D
+(Tue Jul 08 15:50:35 CEST 2014): Loading timepoint 50
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Using model: mpicbg.models.AffineModel3D
+Dimension of final output image:
+From : (-47.938904, -3.7227263, -345.7835) to (691.4339, 962.4772, 351.6402)
+Size: (739.3728, 966.1999, 697.4237) needs 1901 MB of RAM
+tx = 287.0 ty = 3.0 tz = -61.0 scale = 1
+number of jobs: 26
+
+
+PS: The stderr output (if any) follows:
+
+
+
+PS:
+
+Fail to open stderr file output/err.545432: No such file or directory.
+The stderr output is included in this report.
+

@@ -1,0 +1,14 @@
+#!/bin/bash
+source /projects/pilot_spim/Christopher/pipeline/master
+
+mkdir -p $jobs_external_transformation	
+	
+	job="$jobs_external_transformation/external_transformation.job"
+	echo $job
+	echo "#!/bin/bash" > "$job"
+	echo "$XVFB_RUN -a $Fiji -Xms40g -Xmx40g -Ddir=$dir -Dpattern_of_spim=$pattern_extrans \
+		-Dtimepoint=$external_transformation_timepoint -Dangles=$angles -Dreferencetp=$referencetp \
+		-Dm00=$m00 -Dm11=$m11 -Dm22=$m22 -- --no-splash $external_transformation" >> "$job"
+	chmod a+x "$job"
+
+

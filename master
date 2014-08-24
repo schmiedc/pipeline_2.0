@@ -9,7 +9,7 @@
 #    INSTITUTE: Max Planck Institute for Molecular Cell Biology and Genetics
 #         BUGS: ---
 #        NOTES: ---
-#      Version: 1.1
+#      Version: 1.2
 #      CREATED: 2014-04-02
 #     REVISION: 2014-06-05
 #===============================================================================
@@ -26,7 +26,7 @@
 
 dir="/projects/pilot_spim/Christopher/2014-06-21_Stock14_Stock19/" # Data 
                    					           # directory
-job_directory="/projects/pilot_spim/Christopher/pipeline/jobs_master_2.1"
+job_directory="/projects/pilot_spim/Christopher/pipeline/jobs_master_2.2"
 timepoint="`seq 1 50`"                   # timepoints format: "`seq 1 3`" 
 angles="1,2,3,4,5"                          # angles format: "1,2,3" or "1-3"
 num_angles="5" 					# number of angles

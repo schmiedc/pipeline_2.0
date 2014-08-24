@@ -1,0 +1,134 @@
+import java.lang.Runtime;
+import ij.ImagePlus;
+import ij.ImageStack;
+import ij.process.ImageProcessor;
+import ij.IJ;
+import ij.measure.Calibration;
+import mpicbg.ij.stack.InverseTransformMapping;
+import mpicbg.models.TranslationModel3D;
+import mpicbg.models.AffineModel3D;
+import mpicbg.models.InverseCoordinateTransformList;
+import ij.process.ImageStatistics;
+import ij.process.StackStatistics;
+
+runtime = Runtime.getRuntime();
+
+name_rendering = System.getProperty( "name_rendering" );
+dir = System.getProperty( "dir" );
+timepoint = Integer.parseInt( System.getProperty( "timepoint" ) );
+int nFrames = Integer.parseInt( System.getProperty( "nframes" ) );
+target_rendering = System.getProperty( "target_rendering" );
+float minimum_rendering = Float.parseFloat( System.getProperty( "minimum_rendering" ));
+float maximum_rendering = Float.parseFloat( System.getProperty( "maximum_rendering" ));
+
+System.out.println( "Opening" );
+System.out.println( "name_rendering=" + name_rendering );
+System.out.println( "dir=" + dir );
+System.out.println( "timepoint=" + timepoint);
+System.out.println( "Number of frames=" + nFrames );
+System.out.println( "target_directory=" + target_rendering );
+System.out.println( "MinMax=" + minimum_rendering + " " + maximum_rendering );
+
+IJ.run("Image Sequence...", "open=" + dir + "/" + timepoint + " " +
+        "number=1000 starting=1 increment=1 scale=100" + " " +
+        "file=" + name_rendering + " " +
+        "or=[] sort");
+
+imp = IJ.getImage();
+	
+/*
+ * Get min and max using stack histogram.
+ * @param sat_lov
+ *           how many pixels are allowed to be below min.
+ * @param sat_high
+ *           how many pixels are allowed to be above max.
+ * @param stats
+ *           stack histogram.
+ * @return double[2] {min,max}
+ */
+double[] getMinAndMax( double sat_low, double sat_high, ImageStatistics stats ) {
+	int hmin, hmax;
+	int[] histogram = stats.histogram;
+	int hsize = histogram.length;
+	int t_low = (int)(stats.pixelCount*sat_low);
+	int t_high = (int)(stats.pixelCount*sat_high);
+
+	int i = -1;
+	boolean found = false;
+	int count = 0;
+	int maxindex = hsize-1;
+	do {
+		i++;
+		count += histogram[i];
+		found = count>t_low;
+	} while (!found && i<maxindex);
+	hmin = i;
+
+	i = hsize;
+	count = 0;
+	do {
+		i--;
+		count += histogram[i];
+		found = count>t_high;
+	} while (!found && i>0);
+	hmax = i;
+
+	double scale = (double)hsize / (stats.histMax - stats.histMin);
+	double[] a = new double[2];
+	a[0]= (double)hmin / scale + stats.histMin;
+	a[1]= ((double)hmax + 1.0) / scale + stats.histMin;
+	return a;
+}
+
+System.out.println("Analyzing histogram");
+
+/*
+ * compute max, min and convert to 8 bit
+ */
+stats = new StackStatistics( imp, 10000, 0.0, 0.0 );
+double[] minmax = getMinAndMax( minimum_rendering, maximum_rendering , stats );
+IJ.setMinAndMax( imp, minmax[0], minmax[1] );
+
+System.out.println("Orienting");
+
+/* orientation */
+orientation = new net.imglib2.realtransform.AffineTransform3D();
+orientation.set(0.9736341, -0.090486586, 0.2094066, 0.0, 
+				-0.18908852, -0.8336387, 0.51894456, 0.0, 
+				0.12761092, -0.5448576, -0.8287677, 0.0);
+
+
+/* rotation 
+ *theta = ( double )timepoint / 180.0 * Math.PI;
+ *orientation = new net.imglib2.realtransform.AffineTransform3D();
+ *orientation.rotate( 0, theta );
+ *transform = new net.imglib2.realtransform.AffineTransform3D();
+ *transform.preConcatenate(orientation);
+*/
+
+System.out.println("Rendering");
+
+omp = net.imglib2.render.volume.Renderer.runGray(
+	imp,                                      //impSource 3d image, will be converted to singel channle float even if it is ARGB-color
+	imp.getWidth(),                       //@param width width of the target canvas
+	imp.getHeight(),                       //@param height height of the target canvas
+	0,                                        //@param min minimum intensity
+	minmax[ 1 ] * 2,                          //@param max maximum intensity
+	orientation,				//orientation from transformation matrix	
+	//transform,  				//orientation initial transformation assuming that the 3d volume is centered (e.g. export of Interactive Stack Rotation)
+	//( double )timepoint / ( double )nFrames,//animation a value between 0 and 1 that specifies the camera position along a predefined path
+	0,
+	1,                                        //stepSize z-stepping for the volume renderer higher is faster but less beautiful
+	0,					  //bg background intensity
+	1,					  //interpolationMethod 0 NN, 1 NL
+	1.0 / ( minmax[ 1 ] ),                    //alphaScale scale factor for linear intensity to alpha transfer
+//	- (minmax[0] + (minmax[0]*0.2)));
+	-( minmax[ 1 ] - minmax[ 0 ] ) * 0.5);      //alphaOffset offset for linear intensity to alpha transfer
+
+omp.show();
+IJ.save( omp, target_rendering + "/render_tp" + IJ.pad(timepoint, 4) + ".tif" );
+
+System.out.println("All done");
+
+/* shutdown */
+runtime.exit(0);
