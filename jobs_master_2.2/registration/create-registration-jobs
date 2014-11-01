@@ -11,7 +11,7 @@ do
 	echo $job
 	echo "#!/bin/bash" > "$job"
 	echo "$XVFB_RUN -a $Fiji -Dtype_of_registration=$type_of_registration \
-		-Dtype_of_detection=$type_of_detection -Ddir=$dir -Dpattern=$lspattern_switch \
+		-Dtype_of_detection=$type_of_detection -Ddir=$dir -Dpattern=$pattern_switch \
 		-Dtimepoint=$i -Dangles=$angles -Dbead_brightness=$bead_brightness \
 		-Dsubpixel_localization=$subpixel_localization -Dxy_resolution=$xy_resolution \
 		-Dz_scaling=$z_scaling -Dtransformation_model=$transformation_model \

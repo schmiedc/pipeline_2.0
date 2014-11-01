@@ -17,25 +17,25 @@
 #------------------------------------------------------------------------------- 
 #                           General Parameters 
 #
-# Dataset: 2014-08-11_Stock5_Stock26
+# Dataset: 2014-06-21_Stock14_Stock19
 #
 # Select single or multi channel:
 # 	single channel: pattern_of_spim="spim_TL{tt}_Angle{a}.tif" 
 # 	multi channel: pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif"
 #-------------------------------------------------------------------------------
 
-dir="/projects/pilot_spim/Christopher/2014-08-11_Stock5_Stock26/" # Data 
+dir="/projects/pilot_spim/Christopher/2014-06-21_Stock14_Stock19/" # Data 
                    					           # directory
 job_directory="/projects/pilot_spim/Christopher/pipeline/jobs_master_2.2"
-timepoint="`seq 1 64`"                   # timepoints format: "`seq 1 3`" 
+timepoint="`seq 1 50`"                   # timepoints format: "`seq 1 3`" 
 angles="1,2,3,4,5"                          # angles format: "1,2,3" or "1-3"
 num_angles="5" 					# number of angles
 pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif" 	# pattern of spim
 						# for padded zeros use tt
 select_channel="Multi-channel"     	# "Single-channel" or "Multi-channel" 
-Channel_beads="1"			# Channel that contains the beads						      
+Channel_beads="0"			# Channel that contains the beads						      
 pad="2"						      	# For padded zeros
-referencetp="22"					      	# reference timepoint 
+referencetp="40"					      	# reference timepoint 
 xy_resolution="1"				      	# Manual calibration xy
 z_scaling="5.172413"   			      		# Manual calibration z
  
@@ -53,11 +53,11 @@ z_scaling="5.172413"   			      		# Manual calibration z
 #--- Renaming czi files --------------------------------------------------------
 
 first_index="0"                                 # First index of czi files
-last_index="279"					# Last index
-first_timepoint="9"                          	# The first timepoint 
+last_index="394"					# Last index
+first_timepoint="1"                          	# The first timepoint 
 angles_renaming=(1 2 3 4 5)                         # Angles format: (1 2 3)
 						      						      
-source_pattern=/2014-08-11_Stock5_Stock26_5\(\{index\}\).czi 	# Change name of file
+source_pattern=/2014-06-21_Stock14_Stock19_2\(\{index\}\).czi 	# Change name of file
 target_pattern=/spim_TL\{timepoint\}_Angle\{angle\}.czi
  
 #--- Resaving and splitting  ---------------------------------------------------
@@ -95,7 +95,7 @@ pattern_switch="\"spim_"$padding"_Angle{a}${c2}.tif\""
 type_of_detection="\"Difference-of-Mean (Integral image based)\"" # Difference
 radius1="2"							  # of Mean 
 radius2="3"
-threshold="0.01"
+threshold="0.002"
 
 # type_of_detection="\"Difference-of-Gaussian\""		  # Difference 	
 # initial_sigma="1.8000"					  # of Gaussian
@@ -105,7 +105,7 @@ threshold="0.01"
 #			  Timelapse registration 
 #-------------------------------------------------------------------------------
 
-timelapse_timepoint="1-64"
+timelapse_timepoint="1-79"
  
 #------------------------------------------------------------------------------- 
 #		      Dublicate Registration files 
@@ -113,8 +113,8 @@ timelapse_timepoint="1-64"
 # Only for multi-channel data
 #-------------------------------------------------------------------------------
 
-channel_source="1" 			# Channel that contains the beads
-channel_target="0"			
+channel_source="0" 			# Channel that contains the beads
+channel_target="1"			
  
 #------------------------------------------------------------------------------- 
 #		    Multi-view content based fusion 
@@ -135,12 +135,12 @@ registration_fusion="\"Time-point registration (reference=${referencetp}) of cha
 registration_fusion1="\"Time-point registration (reference=${referencetp}) of channel 1\""
 
 downsample_output="2"                   # Downsampling
-x="668"		                        # Cropping parameters of full resolution
-y="24"
-z="580"
-w="796"
-h="1888"
-d="780"
+x="334"		                        # Cropping parameters of full resolution
+y="6"
+z="284"
+w="774"
+h="1870"
+d="896"
  
 #------------------------------------------------------------------------------- 
 #          External transformation for multi-view deconvolution
@@ -242,23 +242,22 @@ zSlices="369" 			     		# For multi-channel rendering
 #-------------------------------------------------------------------------------
 
 target_hdf5="/hdf5/"				             # Target directory
-num_export_job="`seq 0 33`"			             # Number of jobs
-exportXmlFilename="\"${target_hdf5}2014-08-11_Stock5_Stock26\"" 	# xml file
+num_export_job="`seq 0 26`"			             # Number of jobs
+exportXmlFilename="\"${target_hdf5}2014-06-12_Stock14_Stock19\"" 	# xml file
 									# name
-channels_export="\"0,1\""			# Channels
-timepoint_export="\"1-64\""		# timepoints
+channels_export="\"0\""			# Channels
+timepoint_export="\"1-50\""		# timepoints
 filepath="\"/output/\""			# directory of fused data
-filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data pattern
-#filepattern="\"%1\\\$d/DC(l=6.0E-4)_t%1\\\$d_ch%2\\\$d_%3\\\$03d.tif\""  # deconvolved data pattern
+#filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data pattern
+filepattern="\"%1\\\$d/DC(l=6.0E-4)_t%1\\\$d_ch%2\\\$d_%3\\\$03d.tif\""  # deconvolved data pattern
 
 sliceValueMin="0"			# Minimal intensity histogram
-sliceValueMax="65000"			# Maximal intensity histogram 
-					#	fused=65000 deconvolved=2
-cropOffsetX="668"			# x crop
-cropOffsetY="24"				# y crop
-cropOffsetZ="580" 			# z crop
-export_numSlices="389"                  # Number of slices of output
-scale="2"				# downsample factor. 
+sliceValueMax="2"			# Maximal intensity histogram
+cropOffsetX="167"			# x crop
+cropOffsetY="3"				# y crop
+cropOffsetZ="142" 			# z crop
+export_numSlices="447"                  # Number of slices of output
+scale="1"				# downsample factor. 
 					# For deconvolution =1
 #===============================================================================
 # Directories for scripts and advanced settings for processing 
