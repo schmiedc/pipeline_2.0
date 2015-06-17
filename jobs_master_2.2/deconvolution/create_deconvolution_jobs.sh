@@ -1,0 +1,27 @@
+#!/bin/bash
+source /projects/pilot_spim/Christopher/pipeline/master
+
+mkdir -p $jobs_deconvolution
+
+for i in $timepoint
+do
+	job="$jobs_deconvolution/deconvolution-$i.job"
+	echo $job
+	echo "#!/bin/bash" > "$job"
+	echo "$XVFB_RUN -a $Fiji -Xms110g -Xmx110g -Ddir=$dir \
+	-Dpattern_of_spim=$pattern_deconvo -Dtimepoint=$i -Dangles=$angles \
+	-Dregistration_deco=$registration_deco -Dx=$decox -Dy=$decoy \
+	-Dz=$decoz -Dw=$decow -Dh=$decoh -Dd=$decod \
+	-Dtype_of_iteration=$type_of_iteration \
+	-Dosem_acceleration=$osem_acceleration \
+	-Duse_tikhonov_regularization=$use_tikhonov_regularization \
+	-DTikhonov_parameter=$Tikhonov_parameter \
+	-Dcompute=$compute -Dcompute_on=$compute_on \
+	-Dpsf_estimation=$psf_estimation -Dpsf_display=$psf_display \
+	-Dload_input_images_sequentially=$load_input_images_sequentially \
+	-Dfused_image_output=$fused_image_output -Diter=$iter \
+	-- --no-splash $deconvolution" >> "$job"
+	chmod a+x "$job"
+done
+
+

@@ -9,7 +9,7 @@
 #    INSTITUTE: Max Planck Institute for Molecular Cell Biology and Genetics
 #         BUGS: ---
 #        NOTES: ---
-#      Version: 2.2
+#      Version: 1.1
 #      CREATED: 2014-04-02
 #     REVISION: 2014-06-05
 #===============================================================================
@@ -17,27 +17,27 @@
 #------------------------------------------------------------------------------- 
 #                           General Parameters 
 #
-# Dataset:sug 2015-02-22_LZ2_Stock44_Stock56 
+# Dataset: Test scripts
 #
 # Select single or multi channel:
 # 	single channel: pattern_of_spim="spim_TL{tt}_Angle{a}.tif" 
 # 	multi channel: pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif"
 #-------------------------------------------------------------------------------
 
-dir="/projects/pilot_spim/Christopher/2015-02-22_LZ2_Stock44_Stock56/" # Data 
+dir="/projects/pilot_spim/Christopher/Test_scripts/single-channel/" # Data 
                    					           # directory
-job_directory="/projects/pilot_spim/Christopher/pipeline/jobs_master_2.2"
-timepoint="`seq 1 74`"                   # timepoints format: "`seq 1 3`" 
-angles="1,2,3,4,5"                          # angles format: "1,2,3" or "1-3"
-num_angles="5" 					# number of angles
-pattern_of_spim="spim_TL{tt}_Angle{a}_Channel{c}.tif" 	# pattern of spim
+job_directory="/projects/pilot_spim/Christopher/pipeline/jobs_master_2.1"
+timepoint="`seq 1 2`"                   # timepoints format: "`seq 1 3`" 
+angles="1,2,3"                          # angles format: "1,2,3" or "1-3"
+num_angles="3" 					# number of angles
+pattern_of_spim="spim_TL{tt}_Angle{a}.tif" 	# pattern of spim
 						# for padded zeros use tt
-select_channel="Multi-channel"     	# "Single-channel" or "Multi-channel" 
+select_channel="Single-channel"     	# "Single-channel" or "Multi-channel" 
 Channel_beads="1"			# Channel that contains the beads						      
 pad="2"						      	# For padded zeros
-referencetp="30"					      	# reference timepoint 
+referencetp="1"					      	# reference timepoint 
 xy_resolution="1"				      	# Manual calibration xy
-z_scaling="5.24657"   			# Manual calibration z
+z_scaling="3.264352"   			      		# Manual calibration z
  
 #-------------------------------------------------------------------------------
 #                           Preprocessing 
@@ -53,16 +53,16 @@ z_scaling="5.24657"   			# Manual calibration z
 #--- Renaming czi files --------------------------------------------------------
 
 first_index="0"                                 # First index of czi files
-last_index="369"					# Last index
+last_index="5"					# Last index
 first_timepoint="1"                          	# The first timepoint 
-angles_renaming=(1 2 3 4 5)                         # Angles format: (1 2 3)
+angles_renaming=(1 2 3)                         # Angles format: (1 2 3)
 						      						      
-source_pattern=/2015-02-22_LZ2_Stock44_Stock56\(\{index\}\).czi 	# Change name of file
+source_pattern=/2013-11-14_His-YFP\(\{index\}\).czi 	# Change name of file
 target_pattern=/spim_TL\{timepoint\}_Angle\{angle\}.czi
  
 #--- Resaving and splitting  ---------------------------------------------------
 
-angle_prep="1 2 3 4 5"  # angles format: "1 2 3"
+angle_prep="1 2 3"  # angles format: "1 2 3"
 
 #=== Function ==================================================================
 # 	 NAME: channel switch
@@ -95,7 +95,7 @@ pattern_switch="\"spim_"$padding"_Angle{a}${c2}.tif\""
 type_of_detection="\"Difference-of-Mean (Integral image based)\"" # Difference
 radius1="2"							  # of Mean 
 radius2="3"
-threshold="0.003"
+threshold="0.004"
 
 # type_of_detection="\"Difference-of-Gaussian\""		  # Difference 	
 # initial_sigma="1.8000"					  # of Gaussian
@@ -105,7 +105,7 @@ threshold="0.003"
 #			  Timelapse registration 
 #-------------------------------------------------------------------------------
 
-timelapse_timepoint="1-74"
+timelapse_timepoint="1-2"
  
 #------------------------------------------------------------------------------- 
 #		      Dublicate Registration files 
@@ -132,15 +132,15 @@ channel_target="0"
 #-------------------------------------------------------------------------------
   
 registration_fusion="\"Time-point registration (reference=${referencetp}) of channel 0\""	
-registration_fusion1="\"Time-point registration (reference=${referencetp}) of channel 1\""
+#registration_fusion1="\"Time-point registration (reference=${referencetp}) of channel 1\""
 
-downsample_output="1"                   # Downsampling
-x="300"		                        # Cropping parameters of full resolution
-y="20"
-z="224"
-w="780"
-h="1780"
-d="808"
+downsample_output="2"                   # Downsampling
+x="60"		                        # Cropping parameters of full resolution
+y="126"
+z="200"
+w="824"
+h="376"
+d="540"
  
 #------------------------------------------------------------------------------- 
 #          External transformation for multi-view deconvolution
@@ -150,7 +150,7 @@ d="808"
 # 
 #-------------------------------------------------------------------------------
 
-external_transformation_timepoint="1-47" 	  # Timepoints
+external_transformation_timepoint="1-2" 	  # Timepoints
 m00="0.5" 					  # Downsampling 
 m11="0.5"                                         # For downsampling 2x use 0.5
 m22="0.5"
@@ -162,33 +162,23 @@ m22="0.5"
 # For multichannel data specify correct pattern:
 # single: pattern_deconvo="spim_TL{t}_Angle{a}.tif"
 # multi: pattern_deconvo="spim_TL{tt}_Angle{a}_Channel1.tif"
-#
-# For Multi channel: specify channel that is deconvolved 
-# registration_deco=""\"Time-point registration (reference=${referencetp}) of channel 0\""
-# registration_deco=""\"Time-point registration (reference=${referencetp}) of channel 1\""
 #-------------------------------------------------------------------------------
 	
 pattern_deconvo="spim_TL{tt}_Angle{a}.tif"   	# Pattern
-registration_deco="\"Time-point registration (reference=${referencetp}) of channel 0\""
 
-iter="10"					# Number of iterations
+iter="2"					# Number of iterations
 psf_estimation="\"Extract from beads\""     	# PSF parameters 
 # psf_estimation=                           	# Does not work yet!
-decox="19" 				    	# Cropping parameters: 
-decoy="181"				       	# if downsampled divide 
-decoz="143"				       	# fusion cropping parameters 
-decow="928"				       	# by this factor
-decoh="405"
-decod="447"
+decox="30" 				    	# Cropping parameters: 
+decoy="63"				       	# if downsampled divide 
+decoz="100"				       	# fusion cropping parameters 
+decow="412"				       	# by this factor
+decoh="188"
+decod="270"
  
 #------------------------------------------------------------------------------- 
 #				    Rendering 
 # 
-# Different file names of fused or deconvolved data
-#
-# name_rendering="img"  Content based fusion data
-# name_rendering="DC"   Deconvolved data
-#
 # One working scripts for single channel and one for multi-channel: 
 # 	single: single-render-mov.bsh
 # 	multi: multi-render-mov.bsh
@@ -198,7 +188,6 @@ decod="447"
 
 #--- General settings ----------------------------------------------------------
 
-name_rendering="img"					# fused="img" deconvo="DC"
 jobs_rendering=${job_directory}"/3d_rendering_cpu"  	# directory
 rendering=${jobs_rendering}"/single-render-mov.bsh" 	# script single or 
 						    	# multi-channel
@@ -232,37 +221,25 @@ zSlices="369" 			     		# For multi-channel rendering
 # Single or multi channel:
 #                  single: channels_export="\"0\""
 #                   multi: channels_export="\"0,1\""
-#
-# Content based fusion (fusion) or deconvolution (decon) output file pattern:
-# fusion: filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\""
-# decon: filepattern="\"%1\\\$d/DC(l=6.0E-4)_t%1\\\$d_ch%2\\\$d_%3\\\$03d.tif\""
-#
-# Scale for deconvolution output is always 1! Since the downsampling is in the
-# Registration files. Use Downsampled crop values as for deconvolution.
-# 
-# The filepattern needs to be changed depending on the number of silces the 
-# output has! 03d.tif for 3 digits 04.tif for 4 digits
 #-------------------------------------------------------------------------------
 
 target_hdf5="/hdf5/"				             # Target directory
-num_export_job="`seq 0 38`"			             # Number of jobs
-exportXmlFilename="\"${target_hdf5}sug_Experiment.xml\"" 	# xml file
-									# name
-channels_export="\"0,1\""			# Channels
-timepoint_export="\"1-74\""		# timepoints
-filepath="\"/output/\""			# directory of fused data
-filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data pattern
-#filepattern="\"%1\\\$d/DC(l=6.0E-4)_t%1\\\$d_ch%2\\\$d_%3\\\$03d.tif\""  # deconvolved data pattern
-
+num_export_job="`seq 0 2`"			             # Number of jobs
+exportXmlFilename="\"${target_hdf5}2013-11-14_His-YFP.xml\"" 	# xml file
+								# name
+channels_export="\"0\""				     # Channels
+timepoint_export="\"1-2\""				     # timepoints
+filepath="\"/fusion_output/\""			# directory of fused data
+filepattern="\"%1\\\$d/img_tl%1\\\$d_ch%2\\\$d_z%3\\\$03d.tif\"" # fused data	
+								 # pattern
+export_numSlices="269"
 sliceValueMin="0"			# Minimal intensity histogram
-sliceValueMax="65000"			# Maximal intensity histogram 
-					#	fused=65000 deconvolved=2
-cropOffsetX="300"			# x crop
-cropOffsetY="20"				# y crop
-cropOffsetZ="224" 			# z crop
-export_numSlices="808"                  # Number of slices of output
-scale="1"				# downsample factor. 
-					# For deconvolution =1
+sliceValueMax="60000"			# Maximal intensity histogram
+cropOffsetX="0"				# x crop
+cropOffsetY="314"			# y crop
+cropOffsetZ="320" 			# z crop
+scale="2"				# downsample factor
+
 #===============================================================================
 # Directories for scripts and advanced settings for processing 
 #===============================================================================
@@ -281,7 +258,6 @@ Fiji="/sw/users/schmied/packages/Fiji.app.cuda/ImageJ-linux64" # Fiji
 
 #--- Resaving .czi into .tif files----------------------------------------------
 
-Fiji_resave="/sw/users/schmied/lifeline/Fiji.app.lifeline2/ImageJ-linux64" # Fiji that works for resaving
 jobs_resaving=${job_directory}"/czi_resave/" 			# directory
 resaving=${jobs_resaving}"/resaving.bsh" 			# script
  
